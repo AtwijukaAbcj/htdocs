@@ -77,7 +77,7 @@ class __TwigTemplate_c3fc1f129237a16f04655cc673224ed2 extends Template
             echo "    <div class=\"shadow bg-white rounded max-w-4xl mx-auto pt-4 pb-6 px-8 mb-6\">
         <h2>";
             // line 31
-            echo twig_escape_filter($this->env, $this->env->getFunction('__')->getCallable()("Welcome To Gibbon"), "html", null, true);
+            echo twig_escape_filter($this->env, $this->env->getFunction('__')->getCallable()("Welcome To iums"), "html", null, true);
             echo "</h2>
 
         <p style='padding-top: 7px'>

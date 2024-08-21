@@ -77,23 +77,23 @@ class __TwigTemplate_78c5f8bbcc91cdba54932b3002f30ed4 extends Template
             echo "    <div class=\"shadow bg-white rounded max-w-4xl mx-auto pt-4 pb-6 px-8 mb-6\">
         <h2>";
             // line 31
-            echo twig_escape_filter($this->env, $this->env->getFunction('__')->getCallable()("Welcome To Gibbon"), "html", null, true);
+            echo twig_escape_filter($this->env, $this->env->getFunction('__')->getCallable()("Welcome To iums"), "html", null, true);
             echo "</h2>
 
         <p style='padding-top: 7px'>
             ";
             // line 34
-            echo twig_escape_filter($this->env, $this->env->getFunction('__')->getCallable()("Created by teachers, Gibbon is the school platform which solves real problems faced by educators every day."), "html", null, true);
+            echo twig_escape_filter($this->env, $this->env->getFunction('__')->getCallable()("Iums is the school platform which solves real problems faced by educators every day."), "html", null, true);
             echo "
             <br/><br/>
             ";
             // line 36
-            echo twig_escape_filter($this->env, $this->env->getFunction('__')->getCallable()("Free, open source and flexible, Gibbon can morph to meet the needs of a huge range of schools."), "html", null, true);
+            echo twig_escape_filter($this->env, $this->env->getFunction('__')->getCallable()("Robust and flexible, iums can morph to meet the needs of a huge range of schools."), "html", null, true);
             echo "
             <br/><br/>
             ";
             // line 38
-            echo twig_replace_filter($this->env->getFunction('__')->getCallable()("For support, please visit %1\$sgibbonedu.org%2\$s."), ["%1\$s" => "<a target='_blank' href='https://gibbonedu.org/support'>", "%2\$s" => "</a>"]);
+            echo twig_replace_filter($this->env->getFunction('__')->getCallable()("For support, please visit %1\$ssu.ac.ug%2\$s."), ["%1\$s" => "<a target='_blank' href='https://su.ac.ug'>", "%2\$s" => "</a>"]);
             echo "
         </p>
     </div>
@@ -122,10 +122,9 @@ class __TwigTemplate_78c5f8bbcc91cdba54932b3002f30ed4 extends Template
     public function getSourceContext()
     {
         return new Source("{#<!--
-Gibbon: the flexible, open school platform
-Founded by Ross Parker at ICHK Secondary. Built by Ross Parker, Sandra Kuipers and the Gibbon community (https://gibbonedu.org/about/)
+Iums: the flexible,  school platform by Seeta University .(https://su.ac.ug)
 Copyright © 2010, Gibbon Foundation
-Gibbon™, Gibbon Education Ltd. (Hong Kong)
+iums, iums Education Ltd. (Hong Kong)
 
 This is a Gibbon template file, written in HTML and Twig syntax.
 For info about editing, see: https://twig.symfony.com/doc/2.x/
@@ -151,7 +150,7 @@ For info about editing, see: https://twig.symfony.com/doc/2.x/
 
     {% if step <= 1 %}
     <div class=\"shadow bg-white rounded max-w-4xl mx-auto pt-4 pb-6 px-8 mb-6\">
-        <h2>{{ __('Welcome To Gibbon') }}</h2>
+        <h2>{{ __('Welcome To Iums') }}</h2>
 
         <p style='padding-top: 7px'>
             {{ __('Created by teachers, Gibbon is the school platform which solves real problems faced by educators every day.') }}

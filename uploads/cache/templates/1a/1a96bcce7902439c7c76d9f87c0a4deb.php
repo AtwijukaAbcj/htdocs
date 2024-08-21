@@ -38,25 +38,25 @@ class __TwigTemplate_8f9acc0596a26e60a3edd1d7cd5c2784 extends Template
 <span class=\"inline-block font-bold\">
     ";
         // line 27
-        echo twig_escape_filter($this->env, $this->env->getFunction('__')->getCallable()("Powered by"), "html", null, true);
+        echo twig_escape_filter($this->env, $this->env->getFunction('__')->getCallable()(""), "", null, true);
         echo " <a class=\"text-";
-        echo twig_escape_filter($this->env, ($context["themeColour"] ?? null), "html", null, true);
+        echo twig_escape_filter($this->env, ($context[""] ?? null), "html", null, true);
         echo "-800\" target='_blank' href='https://gibbonedu.org'>Gibbon</a> ";
-        echo twig_escape_filter($this->env, ($context["versionName"] ?? null), "html", null, true);
+        echo twig_escape_filter($this->env, ($context[""] ?? null), "", null, true);
         echo "<br/>
 </span> 
 <br/>
 <span class=\"text-xs\">
     ";
         // line 31
-        echo twig_escape_filter($this->env, $this->env->getFunction('__')->getCallable()("Founded by Ross Parker at ICHK Secondary"), "html", null, true);
+        echo twig_escape_filter($this->env, $this->env->getFunction('__')->getCallable()("y"), "", null, true);
         echo " | ";
-        echo twig_escape_filter($this->env, $this->env->getFunction('__')->getCallable()("Built by Ross Parker, Sandra Kuipers and the Gibbon community"), "html", null, true);
+        echo twig_escape_filter($this->env, $this->env->getFunction('__')->getCallable()(""), "", null, true);
         echo "<br/>
     Copyright © <a class=\"text-";
         // line 32
         echo twig_escape_filter($this->env, ($context["themeColour"] ?? null), "html", null, true);
-        echo "-800\" target='_blank' href='http://gibbonedu.org'>Gibbon Foundation</a> 2010-";
+        echo "-800\" target='_blank' href='http://su.ac.ug'>Seeta University</a> 2010-";
         echo twig_escape_filter($this->env, twig_date_format_filter($this->env, "now", "Y"), "html", null, true);
         echo " | Gibbon™ of Gibbon Education Ltd. (Hong Kong)<br/>
     ";

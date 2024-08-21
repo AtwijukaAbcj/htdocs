@@ -41,7 +41,7 @@ class __TwigTemplate_bda18041074c4e258d0f3c91f2337f1b extends Template
         echo twig_escape_filter($this->env, $this->env->getFunction('__')->getCallable()("Powered by"), "html", null, true);
         echo " <a class=\"text-";
         echo twig_escape_filter($this->env, ($context["themeColour"] ?? null), "html", null, true);
-        echo "-800\" target='_blank' href='https://gibbonedu.org'>Gibbon</a> ";
+        echo "-800\" target='_blank' href='https://su.ac.ug'>Seeta Schools</a> ";
         echo twig_escape_filter($this->env, ($context["versionName"] ?? null), "html", null, true);
         echo "<br/>
 </span> 
@@ -49,39 +49,39 @@ class __TwigTemplate_bda18041074c4e258d0f3c91f2337f1b extends Template
 <span class=\"text-xs\">
     ";
         // line 31
-        echo twig_escape_filter($this->env, $this->env->getFunction('__')->getCallable()("Founded by Ross Parker at ICHK Secondary"), "html", null, true);
-        echo " | ";
-        echo twig_escape_filter($this->env, $this->env->getFunction('__')->getCallable()("Built by Ross Parker, Sandra Kuipers and the Gibbon community"), "html", null, true);
+        echo twig_escape_filter($this->env, $this->env->getFunction('__')->getCallable()(""), "html", null, true);
+        echo "  ";
+        echo twig_escape_filter($this->env, $this->env->getFunction('__')->getCallable()(""), "html", null, true);
         echo "<br/>
     Copyright © <a class=\"text-";
         // line 32
         echo twig_escape_filter($this->env, ($context["themeColour"] ?? null), "html", null, true);
-        echo "-800\" target='_blank' href='http://gibbonedu.org'>Gibbon Foundation</a> 2010-";
+        echo "-800\" target='_blank' href='http://su.ac.ug'>Seeta University</a> 2010-";
         echo twig_escape_filter($this->env, twig_date_format_filter($this->env, "now", "Y"), "html", null, true);
-        echo " | Gibbon™ of Gibbon Education Ltd. (Hong Kong)<br/>
+        echo " | Seeta Schools<br/>
     ";
         // line 33
-        echo twig_escape_filter($this->env, $this->env->getFunction('__')->getCallable()("Created under the"), "html", null, true);
+        echo twig_escape_filter($this->env, $this->env->getFunction('__')->getCallable()(""), "html", null, true);
         echo " <a class=\"text-";
         echo twig_escape_filter($this->env, ($context["themeColour"] ?? null), "html", null, true);
-        echo "-800\" target='_blank' href='https://www.gnu.org/licenses/gpl.html'>GNU GPL</a> |
+        echo "-800\" target='_blank' href=''></a>
     <a class=\"text-";
         // line 34
         echo twig_escape_filter($this->env, ($context["themeColour"] ?? null), "html", null, true);
-        echo "-800\" target='_blank' href='https://gibbonedu.org/about/#ourTeam'>";
-        echo twig_escape_filter($this->env, $this->env->getFunction('__')->getCallable()("Credits"), "html", null, true);
-        echo "</a> | 
+        echo "-800\" target='_blank' href='https://su.ac.ug/'>";
+        echo twig_escape_filter($this->env, $this->env->getFunction('__')->getCallable()(""), "html", null, true);
+        echo "</a>  
     <a class=\"text-";
         // line 35
         echo twig_escape_filter($this->env, ($context["themeColour"] ?? null), "html", null, true);
-        echo "-800\" target='_blank' href='https://gibbonedu.org/about/#translators'>";
-        echo twig_escape_filter($this->env, $this->env->getFunction('__')->getCallable()("Translators"), "html", null, true);
-        echo "</a> | 
+        echo "-800\" target='_blank' href='https://su.ac.ug/about/#translators'>";
+        echo twig_escape_filter($this->env, $this->env->getFunction('__')->getCallable()(""), "html", null, true);
+        echo "</a> 
     <a class=\"text-";
         // line 36
         echo twig_escape_filter($this->env, ($context["themeColour"] ?? null), "html", null, true);
-        echo "-800\" target='_blank' href='https://gibbonedu.org/support/'>";
-        echo twig_escape_filter($this->env, $this->env->getFunction('__')->getCallable()("Support"), "html", null, true);
+        echo "-800\" target='_blank' href='https://su.ac.ug/support/'>";
+        echo twig_escape_filter($this->env, $this->env->getFunction('__')->getCallable()(""), "html", null, true);
         echo "</a>
     <br/>
     ";
