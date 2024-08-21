@@ -17,22 +17,24 @@ For info about editing, see: https://twig.symfony.com/doc/2.x/
 
         <div class="mt-2 text-xs font-light text-gray-600 leading-normal">
             {% if expertSupport == 'Y' %}
-                {{ expertSupportExpiry ? __('Until {date}', {'date': formatUsing('date', expertSupportExpiry)}) : __('Lifetime') }}
+            {{ expertSupportExpiry ? __('Until {date}', {'date': formatUsing('date', expertSupportExpiry)}) :
+            __('Lifetime') }}
             {% else %}
-                {{ __('Visit {link} to learn more.', {link: '<a href="http://gibbonedu.com" target="_blank" class="text-red-700 underline">gibbonedu.com</a>'})|raw }}
+            {{ __('Visit {link} to learn more.', {link: '<a href="http://su.ac.ug" target="_blank"
+                class="text-red-700 underline">su.ac.ug</a>'})|raw }}
             {% endif %}
         </div>
-        
+
         <div class="mt-1">
             {% if expertSupport == 'Y' %}
-                {% set expiryCheck = expertSupportExpiry is empty or expertSupportExpiry > 'now'|date('Y-m-d') %}
-                <span class="tag rounded-full {{ expiryCheck ? 'success' : 'error' }}">
-                    {{ expiryCheck ? __('Active') : __('Expired') }}
-                </span>
+            {% set expiryCheck = expertSupportExpiry is empty or expertSupportExpiry > 'now'|date('Y-m-d') %}
+            <span class="tag rounded-full {{ expiryCheck ? 'success' : 'error' }}">
+                {{ expiryCheck ? __('Active') : __('Expired') }}
+            </span>
             {% else %}
-                <span class="tag rounded-full dull">
-                    {{ __('Available') }}
-                </span>
+            <span class="tag rounded-full dull">
+                {{ __('Available') }}
+            </span>
             {% endif %}
         </div>
     </div>
@@ -41,9 +43,9 @@ For info about editing, see: https://twig.symfony.com/doc/2.x/
         {{ __('Members of the Gibbon team are available to help with your support needs.') }}
 
         {% if expertSupport == 'Y' and expertSupportContract is not empty %}
-            <a href="{{ expertSupportContract }}" target="_blank">
-                {{ __('View your support contract.') }}
-            </a>
+        <a href="{{ expertSupportContract }}" target="_blank">
+            {{ __('View your support contract.') }}
+        </a>
         {% endif %}
     </p>
 </div>
@@ -56,12 +58,13 @@ For info about editing, see: https://twig.symfony.com/doc/2.x/
         </div>
         <div class="mt-2 text-xs font-light text-gray-600 leading-normal">
             {% if queryBuilder == 'Y' %}
-                {{ expiry ? __('Until {date}', {'date': formatUsing('date', expiry)}) : __('Lifetime') }}
+            {{ expiry ? __('Until {date}', {'date': formatUsing('date', expiry)}) : __('Lifetime') }}
             {% else %}
-                {{ __('Visit {link} to learn more.', {link: '<a href="http://gibbonedu.com" target="_blank" class="text-red-700 underline">gibbonedu.com</a>'})|raw }}
+            {{ __('Visit {link} to learn more.', {link: '<a href="http://su.ac.ug" target="_blank"
+                class="text-red-700 underline">su.ac.ug</a>'})|raw }}
             {% endif %}
         </div>
-        
+
         <div class="mt-1">
             {% if queryBuilder == 'Y' %}
             {% set expiryCheck = expiry is empty or expiry > 'now'|date('Y-m-d') %}
@@ -80,4 +83,3 @@ For info about editing, see: https://twig.symfony.com/doc/2.x/
         {{ __('This license enables you to access a collection of useful queries through the Query Builder module.') }}
     </p>
 </div>
-

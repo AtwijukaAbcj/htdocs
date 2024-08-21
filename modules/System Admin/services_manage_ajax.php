@@ -52,15 +52,15 @@ if (isActionAccessible($guid, $connection2, '/modules/System Admin/services_mana
     $result = json_decode($response->getBody(), true);
 
     if ($response->getStatusCode() != 200) {
-        echo Format::alert(__('Failed to connect to gibbonedu.com server.').' '.__('Please contact support@gibbonedu.com if the problem persists.'));
+        echo Format::alert(__('Failed to connect to su.ac.ug server.').' '.__('Please contact support@su.ac.ug if the problem persists.'));
         return;
     }
 
     if ($result['access'] == false) {
-        echo Format::alert(__('Failed to authenticate service key. Check that your organization name and key are entered correctly.').' '.__('Please contact support@gibbonedu.com if the problem persists.'));
+        echo Format::alert(__('Failed to authenticate service key. Check that your organization name and key are entered correctly.').' '.__('Please contact support@su.ac.ug if the problem persists.'));
         return;
     }
 
-    // Display the gibbonedu.com services info.
+    // Display the su.ac.ug services info.
     echo $container->get(View::class)->fetchFromTemplate('service.twig.html', $result);
 }

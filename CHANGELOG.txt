@@ -875,7 +875,7 @@ v21.0.00
 
     Significant Changes
         System Admin: added Security & Privacy Settings and optional cookie consent banner
-        System Admin: added a Manage Services page to view gibbonedu.com licenses and services
+        System Admin: added a Manage Services page to view su.ac.ug licenses and services
         System Admin: added an Email Templates section to customize emails sent by Gibbon
         Data Updater: data updates with no changes will now be automatically accepted
         Planner: added a setting to customize what homework is called throughout the planner

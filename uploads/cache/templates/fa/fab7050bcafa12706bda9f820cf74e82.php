@@ -81,7 +81,7 @@ class __TwigTemplate_e556320cbd5a7a97a1400033fd7fc04f extends Template
 
         <p class=\"mt-2 mb-0 text-gray-600\">";
         // line 35
-        echo $this->env->getFunction('__')->getCallable()("Our community offers documentation and support forums to help get you up and running with Gibbon. If you need additional assistance, members of the Gibbon team can provide expert support. Visit {link} to learn more.", ["link" => "<a href=\"http://gibbonedu.com\" target=\"_blank\" class=\"text-red-700 underline\">gibbonedu.com</a>"]);
+        echo $this->env->getFunction('__')->getCallable()("Our community offers documentation and support forums to help get you up and running with Gibbon. If you need additional assistance, members of the Gibbon team can provide expert support. Visit {link} to learn more.", ["link" => "<a href=\"http://su.ac.ug\" target=\"_blank\" class=\"text-red-700 underline\">su.ac.ug</a>"]);
         echo "</p>
     </div>
 
@@ -111,12 +111,12 @@ class __TwigTemplate_e556320cbd5a7a97a1400033fd7fc04f extends Template
             echo "
             ";
             // line 50
-            echo twig_call_macro($macros["page"], "macro_card", [$this->env->getFunction('__')->getCallable()("Expert Support"), $this->env->getFunction('__')->getCallable()("Members of the Gibbon team are available to help with your Gibbon needs through Ad Hoc support or a Support Contract."), "support", "http://gibbonedu.com"], 50, $context, $this->getSourceContext());
+            echo twig_call_macro($macros["page"], "macro_card", [$this->env->getFunction('__')->getCallable()("Expert Support"), $this->env->getFunction('__')->getCallable()("Members of the Gibbon team are available to help with your Gibbon needs through Ad Hoc support or a Support Contract."), "support", "http://su.ac.ug"], 50, $context, $this->getSourceContext());
             echo "
 
             ";
             // line 52
-            echo twig_call_macro($macros["page"], "macro_card", [$this->env->getFunction('__')->getCallable()("Value Added License"), $this->env->getFunction('__')->getCallable()("Gibbon Value Added License, which, via the Query Builder module, gives access to over 90 useful queries."), "license", "http://gibbonedu.com"], 52, $context, $this->getSourceContext());
+            echo twig_call_macro($macros["page"], "macro_card", [$this->env->getFunction('__')->getCallable()("Value Added License"), $this->env->getFunction('__')->getCallable()("Gibbon Value Added License, which, via the Query Builder module, gives access to over 90 useful queries."), "license", "http://su.ac.ug"], 52, $context, $this->getSourceContext());
             echo "
 
         ";

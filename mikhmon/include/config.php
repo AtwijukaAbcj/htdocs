@@ -2,7 +2,7 @@
 if(substr($_SERVER["REQUEST_URI"], -10) == "config.php"){header("Location:./");}; 
 $data['mikhmon'] = array ('1'=>'mikhmon<|<mikhmon','mikhmon>|>aWNlbA==');
 
-$data['KyambogoAirRemote'] = array ('1'=>'KyambogoAirRemote!10.110.39.126:9000','KyambogoAirRemote@|@admin','KyambogoAirRemote#|#mZWfoZ8=','KyambogoAirRemote%KyambogoAir Hotspot','KyambogoAirRemote^KyambogoAir.online','KyambogoAirRemote&Rp','KyambogoAirRemote*10','KyambogoAirRemote(1','KyambogoAirRemote)','KyambogoAirRemote=10','KyambogoAirRemote@!@enable');
+$data['KyambogoAirRemote'] = array ('1'=>'KyambogoAirRemote!192.168.100.5','KyambogoAirRemote@|@admin','KyambogoAirRemote#|#mZWfoZ8=','KyambogoAirRemote%KyambogoAir Hotspot','KyambogoAirRemote^KyambogoAir.online','KyambogoAirRemote&Rp','KyambogoAirRemote*10','KyambogoAirRemote(1','KyambogoAirRemote)','KyambogoAirRemote=10','KyambogoAirRemote@!@enable');
 $data['new-1437'] = array ('1'=>'new-1437!','new-1437@|@','new-1437#|#','new-1437%','new-1437^','new-1437&Rp','new-1437*10','new-1437(1','new-1437)','new-1437=10','new-1437@!@disable');
 $data['new-3053'] = array ('1'=>'new-3053!','new-3053@|@','new-3053#|#','new-3053%','new-3053^','new-3053&Rp','new-3053*10','new-3053(1','new-3053)','new-3053=10','new-3053@!@disable');
 $data['new-3862'] = array ('1'=>'new-3862!','new-3862@|@','new-3862#|#','new-3862%','new-3862^','new-3862&Rp','new-3862*10','new-3862(1','new-3862)','new-3862=10','new-3862@!@disable');

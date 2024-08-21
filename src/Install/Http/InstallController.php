@@ -633,7 +633,7 @@ class InstallController
             $row->addLabel($setting['name'], __($setting['nameDisplay']))->description(__($setting['description']));
             $row->addTextField($setting['name'])->setValue($data[$setting['name']] ?? '')->maxLength(50)->required();
 
-        $form->addRow()->addHeading('gibbonedu.com Value Added Services', __('gibbonedu.com Value Added Services'));
+        $form->addRow()->addHeading('su.ac.ug Value Added Services', __('su.ac.ug Value Added Services'));
 
         $setting = $installer->getSetting('gibboneduComOrganisationName', 'System', true);
         $row = $form->addRow();
