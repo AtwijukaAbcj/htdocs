@@ -58,7 +58,7 @@ class __TwigTemplate_8f9acc0596a26e60a3edd1d7cd5c2784 extends Template
         echo twig_escape_filter($this->env, ($context["themeColour"] ?? null), "html", null, true);
         echo "-800\" target='_blank' href='http://su.ac.ug'>Seeta University</a> 2010-";
         echo twig_escape_filter($this->env, twig_date_format_filter($this->env, "now", "Y"), "html", null, true);
-        echo " | Gibbon™ of Gibbon Education Ltd. (Hong Kong)<br/>
+        echo " | Gibbon™ of Gibbon Education Ltd. <br/>
     ";
         // line 33
         echo twig_escape_filter($this->env, $this->env->getFunction('__')->getCallable()("Created under the"), "html", null, true);

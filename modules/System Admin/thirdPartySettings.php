@@ -33,7 +33,7 @@ if (isActionAccessible($guid, $connection2, '/modules/System Admin/thirdPartySet
     // Access denied
     $page->addError(__('You do not have access to this action.'));
 } else {
-    //Proceed!
+    // Proceed!
     $page->breadcrumbs->add(__('Third Party Settings'));
 
     // Add return messages for test payments
@@ -133,6 +133,7 @@ if (isActionAccessible($guid, $connection2, '/modules/System Admin/thirdPartySet
     $paymentGateways = [
         'PayPal' => __('PayPal'),
         'Stripe' => __('Stripe'),
+        'Flutterwave' => __('Flutterwave'), // Add Flutterwave as a payment gateway option
     ];
     $setting = $settingGateway->getSettingByScope('System', 'paymentGateway', true);
     $row = $form->addRow()->addClass('paymentGateway');
@@ -145,8 +146,10 @@ if (isActionAccessible($guid, $connection2, '/modules/System Admin/thirdPartySet
 
     $form->toggleVisibilityByClass('paypalSettings')->onSelect($setting['name'])->when('PayPal');
     $form->toggleVisibilityByClass('stripeSettings')->onSelect($setting['name'])->when('Stripe');
+    $form->toggleVisibilityByClass('flutterwaveSettings')->onSelect($setting['name'])->when('Flutterwave'); // Toggle for Flutterwave settings
     $form->toggleVisibilityByClass('paymentTest')->onSelect($setting['name'])->whenNot('Please select...');
 
+    // PayPal Settings
     $setting = $settingGateway->getSettingByScope('System', 'paymentAPIUsername', true);
     $row = $form->addRow()->addClass('paypalSettings');
         $row->addLabel($setting['name'], __($setting['nameDisplay']))->description(__($setting['description']));
@@ -162,9 +165,21 @@ if (isActionAccessible($guid, $connection2, '/modules/System Admin/thirdPartySet
         $row->addLabel($setting['name'], __($setting['nameDisplay']))->description(__($setting['description']));
         $row->addTextField($setting['name'])->setValue($setting['value'])->required();
 
+    // Stripe Settings
     $setting = $settingGateway->getSettingByScope('System', 'paymentAPIKey', true);
     $row = $form->addRow()->addClass('stripeSettings');
         $row->addLabel($setting['name'], __($setting['nameDisplay']))->description(__($setting['description']));
+        $row->addTextField($setting['name'])->setValue($setting['value'])->required();
+
+    // Flutterwave Settings
+    $setting = $settingGateway->getSettingByScope('System', 'paymentPublicKey', true);
+    $row = $form->addRow()->addClass('flutterwaveSettings');
+        $row->addLabel($setting['name'], __('Flutterwave Public Key'))->description(__('Your Flutterwave public key.'));
+        $row->addTextField($setting['name'])->setValue('FLWPUBK-00c21af36bd92d40d6599b82b2087fea-X')->required(); // Use provided key
+
+    $setting = $settingGateway->getSettingByScope('System', 'paymentSecretKey', true);
+    $row = $form->addRow()->addClass('flutterwaveSettings');
+        $row->addLabel($setting['name'], __('Flutterwave Secret Key'))->description(__('Your Flutterwave secret key.'));
         $row->addTextField($setting['name'])->setValue($setting['value'])->required();
 
     // Test Payment
@@ -176,10 +191,10 @@ if (isActionAccessible($guid, $connection2, '/modules/System Admin/thirdPartySet
             $col->addButton(__('Go'), 'testPayment()')->addClass('-ml-px w-24');
     }
 
-    // SMS
+    // SMS Settings
     $form->addRow()->addHeading('SMS Settings', __('SMS Settings'))->append(__('Gibbon can use a number of different gateways to send out SMS messages. These are paid services, not affiliated with Gibbon, and you must create your own account with them before being able to send out SMSs using the Messenger module.'));
 
-    // SMS Gateway Options - these are not translated, as they represent company names
+    // SMS Gateway Options
     $smsGateways = ['OneWaySMS', 'Twilio', 'Nexmo', 'Clockwork', 'TextLocal', 'Mail to SMS'];
     $setting = $settingGateway->getSettingByScope('Messenger', 'smsGateway', true);
     $smsGatewaySetting = $setting['value'];
@@ -201,7 +216,7 @@ if (isActionAccessible($guid, $connection2, '/modules/System Admin/thirdPartySet
         $row->addLabel($setting['name'], __($setting['nameDisplay']))->description(__($setting['description']));
         $row->addTextField($setting['name'])->setValue($setting['value'])->maxLength(50);
 
-    // SMS Username variations - these aim to simplify the setup by using the matching terminology for each gateway.
+    // SMS Username variations
     $setting = $settingGateway->getSettingByScope('Messenger', 'smsUsername', true);
     $row = $form->addRow()->addClass('smsSettingsOneWay');
         $row->addLabel($setting['name'], __($setting['nameDisplay']))->description(__($setting['description']));

@@ -32,7 +32,7 @@ if (isActionAccessible($guid, $connection2, '/modules/System Admin/thirdPartySet
     $URL .= '&return=error0';
     header("Location: {$URL}");
 } else {
-    //Proceed!
+    // Proceed!
     $partialFail = false;
     $settingGateway = $container->get(SettingGateway::class);
 
@@ -44,6 +44,8 @@ if (isActionAccessible($guid, $connection2, '/modules/System Admin/thirdPartySet
             'paymentAPIPassword' => 'skip-hidden',
             'paymentAPISignature' => 'skip-hidden',
             'paymentAPIKey' => 'skip-hidden',
+            'paymentPublicKey' => 'skip-hidden',    // Added for Flutterwave
+            'paymentSecretKey' => 'skip-hidden',    // Added for Flutterwave
             'enableMailerSMTP' => 'required',
             'mailerSMTPHost' => '',
             'mailerSMTPPort' => '',
@@ -80,7 +82,7 @@ if (isActionAccessible($guid, $connection2, '/modules/System Admin/thirdPartySet
             if ($property == 'skip-hidden' && !isset($_POST[$name])) continue;
 
             $updated = $settingGateway->updateSettingByScope($scope, $name, $value);
-            $partialFail &= !$updated;
+            $partialFail |= !$updated;
         }
     }
 

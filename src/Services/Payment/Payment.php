@@ -24,7 +24,7 @@ namespace Gibbon\Services\Payment;
 use Omnipay\Omnipay;
 use Omnipay\Common\AbstractGateway as OmnipayGateway;
 use Omnipay\PayPal\ProGateway as OmnipayPaypalProGateway;
-use Omnipay\Stripe\AbstractGateway as OmnipayStripeGateway;
+use Omnipay\Flutterwave\AbstractGateway as OmnipayFlutterwaveGateway;
 use Omnipay\Common\Message\RedirectResponseInterface as OmnipayRedirectResponse;
 use Gibbon\Contracts\Services\Session;
 use Gibbon\Domain\System\SettingGateway;
@@ -37,66 +37,18 @@ use Gibbon\Contracts\Services\Payment as PaymentInterface;
  */
 class Payment implements PaymentInterface
 {
-    /**
-     * @var \Gibbon\Contracts\Services\Session
-     */
     protected $session;
-
-    /**
-     * @var string|false
-     */
     protected $paymentsEnabled;
-
-    /**
-     * @var string|false
-     */
     protected $paymentGatewaySetting;
-
-    /**
-     * @var \Gibbon\Domain\Finance\PaymentGateway
-     */
     protected $paymentGateway;
-
-    /**
-     * @var \Gibbon\Domain\System\SettingGateway
-     */
     protected $settingGateway;
-
-    /**
-     * @var OmnipayGatewayInterface
-     */
     protected $omnipay;
-
-    /**
-     * @var string
-     */
     protected $currency;
-
-    /**
-     * @var array
-     */
     protected $result = [];
-
-    /**
-     * @var string
-     */
     protected $returnURL;
-
-    /**
-     * @var string
-     */
     protected $cancelURL;
-
-    /**
-     * @var string
-     */
     protected $foreignTable;
-
-    /**
-     * @var string
-     */
     protected $foreignTableID;
-
     protected $testMode = false;
 
     public function __construct(Session $session, SettingGateway $settingGateway, PaymentGateway $paymentGateway)
@@ -155,14 +107,13 @@ class Payment implements PaymentInterface
 
         // Send purchase request to the payment gateway
         $options = $this->getPaymentRequestOptions($amount, $reason);
-        $response = $this->omnipay->purchase($options)->setCurrency($this->currency)->send();
+        $response = $this->omnipay->purchase($options)->send();
 
         if ($response->isSuccessful()) {
             // Payment request was successful, continue redirect
             $responseData = $response->getData();
-            header("Location: " . $responseData['url']);
+            header("Location: " . $responseData['link']);
             exit;
-            // return self::RETURN_SUCCESS;
 
         } elseif ($response->isRedirect()) {
             // Redirect to offsite payment gateway
@@ -242,9 +193,6 @@ class Payment implements PaymentInterface
         // Setup the Omnipay payment gateway based on Third Party Settings
         switch ($this->paymentGatewaySetting) {
             case 'PayPal':
-                /**
-                 * @var OmnipayPaypalProGateway
-                 */
                 $this->omnipay = Omnipay::create('PayPal_Express');
                 $this->omnipay->setUsername($this->settingGateway->getSettingByScope('System', 'paymentAPIUsername'));
                 $this->omnipay->setPassword($this->settingGateway->getSettingByScope('System', 'paymentAPIPassword'));
@@ -252,12 +200,11 @@ class Payment implements PaymentInterface
                 $this->omnipay->setParameter('locale_code', $this->session->get('i18n')['code'] ?? 'en_GB');
                 break;
 
-            case 'Stripe':
-                /**
-                 * @var OmnipayStripeGateway
-                 */
-                $this->omnipay = Omnipay::create('Stripe\Checkout');
-                $this->omnipay->setApiKey($this->settingGateway->getSettingByScope('System', 'paymentAPIKey'));
+            case 'Flutterwave':
+                $this->omnipay = Omnipay::create('Flutterwave');
+                $this->omnipay->setApiKey('FLWPUBK-00c21af36bd92d40d6599b82b2087fea-X'); // Provided Public Key
+                $this->omnipay->setSecretKey($this->settingGateway->getSettingByScope('System', 'paymentSecretKey'));
+                $this->omnipay->setTestMode($this->testMode);
                 break;
         }
 
@@ -282,22 +229,23 @@ class Payment implements PaymentInterface
                 ];
                 break;
 
-            case 'Stripe':
+            case 'Flutterwave':
                 $options = [
-                    'success_url' => $this->returnURL.'&paymentState=confirm&token={CHECKOUT_SESSION_ID}&'.http_build_query($params),
-                    'cancel_url' => $this->cancelURL.'&paymentState=cancel',
-                    'payment_method_types' => ['card'],
-                    'mode' => 'payment',
-                    'line_items' => [[
-                        'price_data' => [
-                        'currency' => strtolower($this->currency),
-                        'product_data' => [
-                            'name' => $reason,
-                        ],
-                        'unit_amount' => $amount * 100.0,
-                        ],
-                        'quantity' => 1,
-                    ]],
+                    'amount' => $amount,
+                    'currency' => $this->currency,
+                    'payment_method' => 'card',
+                    'redirect_url' => $this->returnURL.'&paymentState=confirm&token={transaction_id}&'.http_build_query($params),
+                    'tx_ref' => uniqid().time(),
+                    'customer' => [
+                        'email' => $this->session->get('email'),
+                        'name' => $this->session->get('logged'),
+                        'phone_number' => $this->session->get('phone'),
+                    ],
+                    'customizations' => [
+                        'title' => "Payment for $reason",
+                        'description' => "Payment for $reason",
+                        'logo' => '', // Your logo URL
+                    ],
                 ];
                 break;
         }
@@ -307,9 +255,9 @@ class Payment implements PaymentInterface
 
     protected function getPaymentConfirmation($amount)
     {
-        $token = $_GET['token'] ?? '';
+        $transactionId = $_GET['transaction_id'] ?? '';
 
-        if (empty($token)) {
+        if (empty($transactionId)) {
             return false;
         }
 
@@ -317,21 +265,19 @@ class Payment implements PaymentInterface
 
         switch ($this->paymentGatewaySetting) {
             case 'PayPal':
-                // Finalize the PayPal transaction using the returned token and payerid
                 $options = $this->getPaymentRequestOptions($amount, $_GET['reason'] ?? '');
                 $response = $this->omnipay->completePurchase($options + [
                     'amount' => $amount,
                     'currency' => $this->currency,
-                    'token' => $token,
+                    'token' => $transactionId,
                     'payerid' => $_GET['PayerID'] ?? '',
                 ])->send();
                 break;
 
-            case 'Stripe':
-                // Get the Stripe transaction result using the returned token
-                $transaction = $this->omnipay->fetchTransaction();
-                $transaction->setTransactionReference($token);
-                $response = $transaction->send();
+            case 'Flutterwave':
+                $response = $this->omnipay->verifyTransaction([
+                    'transaction_id' => $transactionId,
+                ])->send();
                 break;
         }
 
@@ -344,7 +290,6 @@ class Payment implements PaymentInterface
             return ['success' => false, 'status' => 'Failed'];
         }
 
-        // Get common transaction information
         $data = $response->getData();
         $result = [
             'success' => $response->isSuccessful(),
@@ -353,7 +298,6 @@ class Payment implements PaymentInterface
             'token'   => $_GET['token'] ?? null,
         ];
 
-        // Transform transaction information unique to each gateway into a common format
         switch ($this->paymentGatewaySetting) {
             case 'PayPal':
                 $status = $data['PAYMENTINFO_0_PAYMENTSTATUS'] ?? '';
@@ -367,20 +311,19 @@ class Payment implements PaymentInterface
 
                 break;
 
-            case 'Stripe':
-                $status = $data['payment_status'] ?? '';
+            case 'Flutterwave':
+                $status = $data['status'] ?? '';
                 $result += [
-                    'status'        => $status == 'paid' ? 'Complete' : ($response->isPending()? 'Pending' : 'Failed'),
-                    'transactionID' => $data['payment_intent'] ?? null,
+                    'status'        => $status == 'successful' ? 'Complete' : ($response->isPending()? 'Pending' : 'Failed'),
+                    'transactionID' => $data['id'] ?? null,
                     'receiptID'     => null,
-                    'amount'        => !empty($data['amount_total']) ? ($data['amount_total'] / 100.0) : 0,
-                    'payer'         => $data['customer'] ?? null,
+                    'amount'        => !empty($data['amount']) ? ($data['amount']) : 0,
+                    'payer'         => $data['customer']['email'] ?? null,
                 ];
 
                 break;
         }
 
-        // Record this payment, successful or failure
         $result['gibbonPaymentID'] = $this->paymentGateway->insert([
             'foreignTable'            => $this->foreignTable,
             'foreignTableID'          => $this->foreignTableID,
